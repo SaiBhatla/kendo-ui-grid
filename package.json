@@ -11,6 +11,7 @@
     "@progress/kendo-react-inputs": "^0.4.0",
     "@progress/kendo-react-intl": "^0.4.0",
     "@progress/kendo-theme-default": "^2.49.0",
+    "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "font-awesome": "^4.7.0",
     "react": "^16.2.0",
