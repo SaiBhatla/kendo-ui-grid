@@ -1,54 +1,47 @@
 import React from 'react';
-import { Grid, GridColumn as Column} from '@progress/kendo-react-grid';
+import { Grid, GridColumn as Column } from '@progress/kendo-react-grid';
 import '@progress/kendo-theme-default/dist/all.css';
-import {getRowData,getColumnDefs} from '../data';
 
+class DataGrid extends React.Component {
 
-class DataGrid extends React.Component{
-   
     constructor(props) {
         super(props);
         this.state = {
             rows: [],
-            columnDefs:[]
+            columns: [],
+            columnDefs: []
         };
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        if (prevProps.DashboardName !== this.props.DashboardName) 
-        {
-            let data = await this.getRows(this.props.DashboardName);
+        if (prevProps.DashboardName !== this.props.DashboardName) {
             this.setState(prevState => ({
-                columnDefs:this.getColumns(this.props.DashboardName),
-                rows:data
+                columnDefs: this.props.ColumnDefs,
+                rows: this.props.Rows,
+                columns: this.getColumns(this.props.ColumnDefs),
             }));
         }
 
-      }
-    
-    async getRows(dashboardName)
-    {
-        let data = await getRowData(dashboardName);
-        return data;
     }
-    getColumns = (dashboardName) =>{
+
+
+    getColumns = (columnDefs) => {
         let columns = [];
-        const columnDefs = getColumnDefs(dashboardName);
-        for(let i = 0; i < columnDefs.length;i++){
+        for (let i = 0; i < columnDefs.length; i++) {
             let column = columnDefs[i];
-            columns.push(<Column key = {column.field} field = {column.field} title = {column.title}/>);
+            columns.push(<Column key={column.field} field={column.field} title={column.title} />);
         }
         return columns;
     }
 
     render() {
-        
-        const columns = this.state.columnDefs;
+
+        const columns = this.state.columns;
         const data = this.state.rows;
         return (
             <div>
                 <Grid data={data}>
-                   {columns}
+                    {columns}
                 </Grid>
             </div>
         );
