@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import DataGrid from './components/Grid/DataGrid';
 import {ComboBox} from '@progress/kendo-react-dropdowns';
-import {getComboboxData} from './components/data'
+import {getComboboxData,getColumnDefs,getRowData} from './components/data'
 
 
 class App extends React.Component{
@@ -13,22 +13,34 @@ class App extends React.Component{
 
     this.state = {
       selectedItem: null,
-      data:getComboboxData()
+      data:getComboboxData(),
+      rows:[],
+      columns:[]
     };
 
     this.selectedItemChange = this.selectedItemChange.bind(this);
   }
   
-  selectedItemChange(event) {
+  async selectedItemChange(event) {
     const selectedItem = event.target.value;
-
+    const data = await this.getRows(selectedItem);
     this.setState({
       selectedItem: selectedItem,
+      columns:getColumnDefs(selectedItem),
+      rows:data
     });
+  }
+
+  async getRows(dashboardName)
+  {
+      let data = await getRowData(dashboardName);
+      return data;
   }
 
 	render(){
     const selectedItem = this.state.selectedItem;
+    const rows = this.state.rows;
+    const columns = this.state.columns;
     
     return(
     	<div>
@@ -41,7 +53,7 @@ class App extends React.Component{
                     />
                 </div>
         <br /> <br />
-        <DataGrid DashboardName={selectedItem}/> 	
+        <DataGrid DashboardName={selectedItem} Rows={rows} ColumnDefs={columns}/> 	
       </div>
     );
   }
