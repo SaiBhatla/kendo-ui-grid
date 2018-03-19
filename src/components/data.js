@@ -58,18 +58,7 @@ export async function getRowData(dashboardName) {
     //ideally, we would append the dashboardname to the service and get the related column definitions. For now, we will hard code based on dashboard name using switch. Once the API is ready, we wont need switch
     switch(dashboardName){
         case "Categories":
-        //Axios.defaults.withCredentials = true;
-            let axiosConfig = {
-                headers:{
-          //          "Access-Control-Allow-Credentials":"true",
-                    "Access-Control-Allow-Origin":"http://localhost:3000",
-                    "Cache-Control":"no-cache",
-                    "Access-Control-Allow-Methods":"GET, POST",
-                    "Access-Control-Allow-Headers":"Content-Type, Authorization, Accept",
-                    "Access-Control-Max-Age":"1728000"
-                }
-            };
-            const res = await  Axios.post(getServiceUrl(),getRequestPayload(),axiosConfig);
+            const res = await  Axios.post(getServiceUrl(),getRequestPayload());
             const data = await res.data.value;
             console.log(data);
             return data;
