@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import DataGrid from './components/Grid/DataGrid';
 import {ComboBox} from '@progress/kendo-react-dropdowns';
-import {getComboboxData,getColumnDefs,getRowData} from './components/data'
+import {getComboboxData,getData} from './components/data'
 
 
 class App extends React.Component{
@@ -26,14 +26,14 @@ class App extends React.Component{
     const data = await this.getRows(selectedItem);
     this.setState({
       selectedItem: selectedItem,
-      columns:getColumnDefs(selectedItem),
-      rows:data
+      columns:data.columns,
+      rows:data.rows
     });
   }
 
   async getRows(dashboardName)
   {
-      let data = await getRowData(dashboardName);
+      let data = await getData(dashboardName);
       return data;
   }
 
@@ -41,7 +41,6 @@ class App extends React.Component{
     const selectedItem = this.state.selectedItem;
     const rows = this.state.rows;
     const columns = this.state.columns;
-    
     return(
     	<div>
         <div style={{ display: 'inline-block' }}>

@@ -29,7 +29,7 @@ class DataGrid extends React.Component {
         let columns = [];
         for (let i = 0; i < columnDefs.length; i++) {
             let column = columnDefs[i];
-            columns.push(<Column key={column.field} field={column.field} title={column.title} />);
+            columns.push(<Column key={i} field={column.field} title={column.title} />);
         }
         return columns;
     }
