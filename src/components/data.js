@@ -59,7 +59,7 @@ export async function getRowData(dashboardName) {
     switch(dashboardName){
         case "Categories":
             const res = await  Axios.post(getServiceUrl(),getRequestPayload());
-            const data = await res.data.value;
+            const data = await res.data;
             console.log(data);
             return data;
         case "Products":
