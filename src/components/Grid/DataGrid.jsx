@@ -36,12 +36,11 @@ class DataGrid extends React.Component {
     }
 
     render() {
-
         const columns = this.state.columns;
         const data = this.state.rows;
         return (
             <div>
-                <Grid data={data}>
+                <Grid data={data} style={{ maxHeight: this.props.MaxHeight }}>
                     {columns}
                 </Grid>
             </div>
