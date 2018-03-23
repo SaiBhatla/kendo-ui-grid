@@ -65,7 +65,7 @@ function getChartData(data, dashboardName) {
                 type: "column",
                 data: []
             };
-            for (let i = 1; i < data.length; i+=2) {
+            for (let i = 0; i < data.length; i+=3) {
                 let row = data[i];
                 series_1_obj.data.push(row.DTDPnL);
                 series_2_obj.data.push(row.MTDPnL);
@@ -88,7 +88,7 @@ function getChartCategories(data, dashboardName) {
             }
             return categories;
         case reports.PnLReport:
-            for (let i = 1; i < data.length; i+=2) {
+            for (let i = 0; i < data.length; i+=3) {
                 let row = data[i];
                 categories.push(row.CountryDesc);
             }
