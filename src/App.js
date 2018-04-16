@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import DataGrid from './components/Grid/DataGrid';
 import ChartContainer from './components/ChartContainer';
-import { ComboBox } from '@progress/kendo-react-dropdowns';
+//import { ComboBox } from '@progress/kendo-react-dropdowns';
 import { getComboboxData, getData } from './components/data'
+import { XPHComboBox } from './controls/DropDowns/XPHComboBox';
+import { XPHDropDownList } from './controls/DropDowns/XPHDropDownList';
 
 
 class App extends React.Component {
@@ -24,15 +26,14 @@ class App extends React.Component {
     this.selectedItemChange = this.selectedItemChange.bind(this);
   }
 
-  async selectedItemChange(event) {
-    const selectedItem = event.target.value;
+  async selectedItemChange(selectedItem) {
     const data = await this.getRows(selectedItem);
     this.setState({
       selectedItem: selectedItem,
       columns: data.columns,
       rows: data.rows,
-      series:data.chartData,
-      categories:data.chartCategories
+      series: data.chartData,
+      categories: data.chartCategories
     });
   }
 
@@ -47,21 +48,19 @@ class App extends React.Component {
     const columns = this.state.columns;
     const series = this.state.series;
     const categories = this.state.categories;
-   
+    console.log(selectedItem);
     return (
       <div>
-        <div style={{ display: 'inline-block' }}>
-          <ComboBox
-            data={this.state.data}
-            onChange={this.selectedItemChange}
-            placeholder={'Select Item...'}
-            value={selectedItem}
-          />
+        <div class="navBar">
+          <XPHComboBox data={this.state.data} selectedItem={selectedItem} selectedItemChange={this.selectedItemChange} />
+          
         </div>
+
+
         <br /> <br />
         <DataGrid DashboardName={selectedItem} Rows={rows} ColumnDefs={columns} MaxHeight={'400px'} />
         <br /> <br />
-        <ChartContainer series={series} categories={categories}/>
+        <ChartContainer series={series} categories={categories} />
       </div>
     );
   }

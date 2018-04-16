@@ -46,7 +46,7 @@ function getChartData(data, dashboardName) {
                 type: "column",
                 data: []
             };
-            for (let i = 1; i < data.length; i+=2) {
+            for (let i = 1; i < data.length; i++) {
                 let row = data[i];
                 series_1_obj.data.push(row.MktValueGross);
                 series_2_obj.data.push(row.MktValueNet);
@@ -65,7 +65,7 @@ function getChartData(data, dashboardName) {
                 type: "column",
                 data: []
             };
-            for (let i = 0; i < data.length; i+=3) {
+            for (let i = 0; i < data.length; i++) {
                 let row = data[i];
                 series_1_obj.data.push(row.DTDPnL);
                 series_2_obj.data.push(row.MTDPnL);
@@ -82,13 +82,13 @@ function getChartCategories(data, dashboardName) {
     let categories = [];
     switch (dashboardName) {
         case reports.ExposureReport:
-            for (let i = 1; i < data.length; i+=2) {
+            for (let i = 1; i < data.length; i++) {
                 let row = data[i];
                 categories.push(row.AssetTypeDesc);
             }
             return categories;
         case reports.PnLReport:
-            for (let i = 0; i < data.length; i+=3) {
+            for (let i = 0; i < data.length; i++) {
                 let row = data[i];
                 categories.push(row.CountryDesc);
             }
