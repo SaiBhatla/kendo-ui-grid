@@ -13,7 +13,7 @@ class DataGrid extends React.Component {
         };
     }
 
-    async componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevProps.DashboardName !== this.props.DashboardName) {
             this.setState(prevState => ({
                 columnDefs: this.props.ColumnDefs,
@@ -21,7 +21,6 @@ class DataGrid extends React.Component {
                 columns: this.getColumns(this.props.ColumnDefs),
             }));
         }
-
     }
 
 
